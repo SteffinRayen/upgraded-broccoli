@@ -4,6 +4,7 @@ package com.search.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -36,10 +37,11 @@ public class SearchServlet extends HttpServlet {
 		
 		System.out.println("Calling");
 		SearchDB obj = new SearchDB();
-		ArrayList<SearchModel> dataList= new ArrayList<SearchModel>();
+		
+		List<SearchModel> dataList= new ArrayList<SearchModel>();
 		try {
 			dataList = obj.searchDB(formData);
-			
+			System.out.println("Came Back");
 			response.getWriter().append("<table>");
 			Iterator<SearchModel> iter = dataList.iterator();
 			while (iter.hasNext()) {

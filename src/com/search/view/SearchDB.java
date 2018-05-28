@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
+import java.util.List;
 import com.search.model.SearchModel;
 
 public class SearchDB {
@@ -15,16 +15,16 @@ public class SearchDB {
 	static final String USER_NAME = "root";
 	static final String PASSWORD = "";
 		
-	public ArrayList<SearchModel> searchDB(SearchModel formData) throws ClassNotFoundException {
+	public List<SearchModel> searchDB(SearchModel formData) throws ClassNotFoundException {
 		Connection con = null;
 		Statement st = null;
 		ResultSet rs = null;
-		ArrayList<SearchModel> tableData = new ArrayList<SearchModel>(4);
+		List<SearchModel> tableData = new ArrayList<SearchModel>();
 		
 		try {			
 			Class.forName(JDBC_DRIVER);			
 			con = DriverManager.getConnection(DB_URL,USER_NAME,PASSWORD);			
-			String query = "select * from users where uname='"+formData.getUname()+"'";
+			String query = "select * from users";
 			System.out.println(query);
 			st = con.createStatement();
 			rs = st.executeQuery(query);			
@@ -36,6 +36,7 @@ public class SearchDB {
 				tableData.add(tempData);				
 				
 			}
+			System.out.println("Data");
 			return tableData;
 		} catch (Exception e) {
 			System.out.println("Exception");
